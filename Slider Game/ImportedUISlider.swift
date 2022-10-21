@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ImportedUISlider: UIViewRepresentable {
     
-    @Binding var thumbColor: UIColor
+    let thumbColor: UIColor
     @Binding var value: Double
     
     func makeUIView(context: Context) -> UISlider {
@@ -34,7 +34,7 @@ struct ImportedUISlider: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(value: $value, thumbColor: $thumbColor)
+        Coordinator(value: $value, thumbColor: thumbColor)
     }
 }
 
@@ -43,11 +43,11 @@ extension ImportedUISlider {
     class Coordinator: NSObject {
         
         @Binding var value: Double
-        @Binding var thumbColor: UIColor
+        var thumbColor: UIColor
         
-        init(value: Binding<Double>, thumbColor: Binding<UIColor>) {
+        init(value: Binding<Double>, thumbColor: UIColor) {
             self._value = value
-            self._thumbColor = thumbColor
+            self.thumbColor = thumbColor
         }
         
         @objc func valueChanged(_ sender: UISlider) {
@@ -59,6 +59,6 @@ extension ImportedUISlider {
 
 struct ImportedUISlider_Preeviews: PreviewProvider {
     static var previews: some View {
-        ImportedUISlider(thumbColor: .constant(.red), value: .constant(50))
+        ImportedUISlider(thumbColor: .orange, value: .constant(50))
     }
 }

@@ -9,14 +9,14 @@ import SwiftUI
 
 struct SliderView: View {
     
-    @Binding var thumbColor: UIColor
+    let thumbColor: UIColor
     @Binding var value: Double
     
     var body: some View {
         HStack(spacing: 12) {
             Text("0")
                 .font(.system(size: 20, weight: .medium))
-            ImportedUISlider(thumbColor: $thumbColor, value: $value)
+            ImportedUISlider(thumbColor: thumbColor, value: $value)
             Text("100")
                 .font(.system(size: 20, weight: .medium))
         }
@@ -26,6 +26,6 @@ struct SliderView: View {
 
 struct SliderView_Previews: PreviewProvider {
     static var previews: some View {
-        SliderView(thumbColor: .constant(.orange), value: .constant(50))
+        SliderView(thumbColor: .orange, value: .constant(50))
     }
 }

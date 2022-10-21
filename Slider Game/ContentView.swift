@@ -11,16 +11,15 @@ struct ContentView: View {
     
     @State private var randomNumber = Double.random(in: 0...100)
     @State private var sliderValue = Double.random(in: 0...100)
-    @State private var sliderThumb = UIColor.orange
     
     var body: some View {
         VStack(spacing: 32) {
             VStack {
-                HeadText(text: "Подвинь слайдер как можно ближе к случайному значению")
+                HeadText(text: "Подвинь слайдер как можно ближе к данному значению:")
                 Text("\(lround(randomNumber))")
                     .font(.system(size: 32, weight: .medium))
                     .padding()
-                SliderView(thumbColor: $sliderThumb, value: $sliderValue)
+                SliderView(thumbColor: calculateThumbColorAlfa(), value: $sliderValue)
             }
             VStack (spacing: 16) {
                 ButtonView(title: "Проверить", background: .blue, textColor: .white) {
@@ -31,6 +30,13 @@ struct ContentView: View {
                 }
             }
         }
+    }
+    
+    private func calculateThumbColorAlfa() -> UIColor {
+        
+        let difference = abs(randomNumber - sliderValue)
+        print(difference)
+        return UIColor(red: 255/255, green: 165/255, blue: 0/255, alpha: CGFloat(1 - (difference / 100)))
     }
 }
 
