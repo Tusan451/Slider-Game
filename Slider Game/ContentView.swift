@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @State private var alertPresented = false
+    
     @State private var randomNumber = Double.random(in: 0...100)
     @State private var sliderValue = Double.random(in: 0...100)
     
@@ -23,20 +25,31 @@ struct ContentView: View {
             }
             VStack (spacing: 16) {
                 ButtonView(title: "Проверить", background: .blue, textColor: .white) {
-                    ///
+                    alertPresented.toggle()
                 }
-                ButtonView(title: "Начать заново", background: .white, textColor: .blue) {
-                    ///
+                .alert(isPresented: $alertPresented) {
+                    Alert(title: Text("Результат"), message: Text("Вы набрали \(calculateScore()) из 100 баллов."))
+                }
+                ButtonView(title: "Сбросить", background: .white, textColor: .blue) {
+                    randomNumber = Double.random(in: 0...100)
+                    sliderValue = Double.random(in: 0...100)
                 }
             }
         }
     }
     
+    // Calculating Slider Thumb Alpha
     private func calculateThumbColorAlfa() -> UIColor {
-        
         let difference = abs(randomNumber - sliderValue)
         print(difference)
         return UIColor(red: 255/255, green: 165/255, blue: 0/255, alpha: CGFloat(1 - (difference / 100)))
+    }
+    
+    // Calculating Score
+    private func calculateScore() -> Int {
+        let difference = abs(lround(randomNumber - sliderValue))
+        print(difference)
+        return 100 - difference
     }
 }
 
