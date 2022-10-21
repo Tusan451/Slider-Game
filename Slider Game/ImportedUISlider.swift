@@ -17,7 +17,6 @@ struct ImportedUISlider: UIViewRepresentable {
         let slider = UISlider(frame: .zero)
         slider.minimumValue = 0
         slider.maximumValue = 100
-        slider.thumbTintColor = thumbColor
         
         slider.addTarget(
             context.coordinator,
@@ -34,7 +33,7 @@ struct ImportedUISlider: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(value: $value, thumbColor: thumbColor)
+        Coordinator(value: $value)
     }
 }
 
@@ -43,16 +42,13 @@ extension ImportedUISlider {
     class Coordinator: NSObject {
         
         @Binding var value: Double
-        var thumbColor: UIColor
         
-        init(value: Binding<Double>, thumbColor: UIColor) {
+        init(value: Binding<Double>) {
             self._value = value
-            self.thumbColor = thumbColor
         }
         
         @objc func valueChanged(_ sender: UISlider) {
             value = Double(sender.value)
-            thumbColor = sender.thumbTintColor!
         }
     }
 }

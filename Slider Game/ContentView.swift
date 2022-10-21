@@ -41,14 +41,12 @@ struct ContentView: View {
     // Calculating Slider Thumb Alpha
     private func calculateThumbColorAlfa() -> UIColor {
         let difference = abs(randomNumber - sliderValue)
-        print(difference)
         return UIColor(red: 255/255, green: 165/255, blue: 0/255, alpha: CGFloat(1 - (difference / 100)))
     }
     
     // Calculating Score
     private func calculateScore() -> Int {
         let difference = abs(lround(randomNumber - sliderValue))
-        print(difference)
         return 100 - difference
     }
 }
