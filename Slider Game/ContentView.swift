@@ -9,13 +9,27 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        HeadText(text: "Подвинь слайдер как можно ближе к случайному значению")
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+// HeadText View
+struct HeadText: View {
+    
+    let text: String
+    
+    var body: some View {
+        Text(text)
+            .multilineTextAlignment(.center)
+            .font(.system(size: 24, weight: .medium))
+            .lineSpacing(10)
+            .frame(width: 340, alignment: .center)
+            .padding()
     }
 }
